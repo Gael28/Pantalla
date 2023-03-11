@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-header">
+        Agregar Reservacion
+    </div>
+    <div class="card-body">
+       <form [formGroup]="formularioDeEmpleados"  (ngSubmit)="EnviarDatos()">
+
+<div class="mb-3">
+  <label for="" class="form-label">Nombre</label>
+  <input type="text"
+    class="form-control" name="" formControlName="Nombre" id="" aria-describedby="helpId" placeholder="Escribe tu nombre">
+</div>
+
+
+<div class="mb-3">
+    <label for="" class="form-label">Num. Personas</label>
+    <input type="number"
+      class="form-control" name="" formControlName="NumPersonas" id="" aria-describedby="helpId" placeholder="Escribe el numero de Personas">
+  </div>
+  
+
+  <div class="mb-3">
+    <label for="" class="form-label">Telefono</label>
+    <input type="text"
+      class="form-control" name="" formControlName="Telefono" id="" aria-describedby="helpId" placeholder="Escribe un numero Telefonico">
+  </div>
+  
+<div class="btn-group" role="group" aria-label="">
+  <button type="submit" class="btn btn-success"> Agregar </button>
+
+  <button type="button" class="btn btn-primary"> Cancelar </button>
+</div>
+
+
+       </form>  
+
+
+    </div>
+   
+</div>
