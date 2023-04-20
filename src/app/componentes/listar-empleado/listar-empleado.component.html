@@ -4,7 +4,7 @@
     </div>
 
     <div class="card-body">
-            <table class="table">
+            <table *ngIf="listProductos.length > 0"  class="table">
                 <thead>
                     <tr>
                         <th >Nombre</th>
@@ -14,21 +14,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="">
-                        <td>Gael Alejandro</td>
-                        <td>3</td>
-                        <td>8124462717</td>
+                    <tr *ngFor="let producto of listProductos">
+                        <td>  {{ producto.nombre   }}   </td>
+                        <td> {{ producto.numpersonas   }} </td>
+                        <td> {{ producto.telefono   }} </td>
                         <td>
-                            <a  class="btn btn-danger" role="button" routerLink="/editar-empleado/1"> Editar </a> | 
                             
                             
-                          <a  class="btn btn-danger" role="button">Borrar</a>  
+                            <a  (click)="eliminarProducto(producto._id)" class="btn btn-danger"  role="button">Borrar</a>  
                         </td> 
 
                     </tr>
                 
                 </tbody>
             </table>
+            <h5  style="text-align: start; margin-top: 10px;" *ngIf="listProductos.length == 0">No hay Reservaciones</h5>
         </div>
         
 

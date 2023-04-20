@@ -1,23 +1,34 @@
-import { Injectable } from '@angular/core';
-
 import { HttpClient } from '@angular/common/http';
-import {Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Empleado } from './Empleado';
-
-
+ 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CrudService {
-  API: string='';
-  constructor(private clienteHttp:HttpClient) { }
-//Insertar datos en api
-AgregarEmpleado(datosEmpleado:Empleado):Observable<any>{
-return this.clienteHttp.post(this.API+"?insertar=1",datosEmpleado);
+export class ProductoService{
+  url = 'http://localhost:4000/api/productos/';
 
+
+constructor(private http: HttpClient) { }
+
+  getProductos(): Observable<any> {
+   return this.http.get(this.url);
+  }
+
+  eliminarProducto(id: string): Observable<any>{
+    return this.http.delete(this.url + id);
+  }
+
+  guardarProducto(producto: Empleado): Observable<any>{
+    return this.http.post(this.url, producto);
+  }
 }
 
 
 
-}
+
+  
+
+  

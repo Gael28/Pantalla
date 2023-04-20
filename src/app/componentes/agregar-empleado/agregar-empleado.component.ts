@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import{ FormGroup, FormBuilder } from '@angular/forms';
-import { CrudService } from 'src/app/servicio/crud.service';
+import{ FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Empleado } from 'src/app/servicio/Empleado';
+import { ProductoService } from 'src/app/servicio/crud.service';
 
 @Component({
   selector: 'app-agregar-empleado',
@@ -11,35 +13,46 @@ import { Router } from '@angular/router';
 export class AgregarEmpleadoComponent implements OnInit {
   formularioDeEmpleados:FormGroup;
 
-  constructor(
-    public formulario:FormBuilder,
-    private CrudService: CrudService,
-    private ruteador: Router
-    
-    ){
+  constructor(private fb: FormBuilder,
+             private router: Router,
+             private toastr: ToastrService,
+             private _productoService: ProductoService) { 
+this.formularioDeEmpleados = this.fb.group({
+Nombre: ['', Validators.required],
+NumPersonas: ['', Validators.required],
+Telefono: ['', Validators.required],
 
-this.formularioDeEmpleados=this.formulario.group({
+})
+}
+ngOnInit(): void {
+  
+} 
 
-  Nombre: [''],
-  NumPersonas: [''],
-  Telefono: ['']
-
-});
-
-
-   }
-  ngOnInit(): void {
-     }
-    EnviarDatos():any {
-      console.log("Me pe");
-      console.log(this.formularioDeEmpleados.value);
-      this.CrudService.AgregarEmpleado(this.formularioDeEmpleados.value).subscribe();
-
-
-      this.ruteador.navigateByUrl('/listar-empleado');
-
-    }
+agregarReservacion(){
+  console.log(this.formularioDeEmpleados);
 
  
 
+const Empleado: Empleado = {
+nombre: this.formularioDeEmpleados.get ('Nombre')?.value,
+numpersonas: this.formularioDeEmpleados.get ('NumPersonas')?.value,
+telefono: this.formularioDeEmpleados.get ('Telefono')?.value,
+
 }
+console.log(Empleado);
+this._productoService.guardarProducto(Empleado).subscribe(data =>{
+
+this.toastr.success('  ', 'Reservacion Echa!');
+this.router.navigate(['/listar-empleado/']);
+
+
+}, Error => {
+
+  console.log(Error);
+  this.formularioDeEmpleados.reset();
+
+})
+
+}
+
+} 

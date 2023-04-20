@@ -3,12 +3,17 @@
         Agregar Reservacion
     </div>
     <div class="card-body">
-       <form [formGroup]="formularioDeEmpleados"  (ngSubmit)="EnviarDatos()">
+       <form [formGroup]="formularioDeEmpleados"  (ngSubmit)="agregarReservacion()">
 
 <div class="mb-3">
   <label for="" class="form-label">Nombre</label>
   <input type="text"
     class="form-control" name="" formControlName="Nombre" id="" aria-describedby="helpId" placeholder="Escribe tu nombre">
+    <div class="text-danger"
+      
+      *ngIf="formularioDeEmpleados.get('Nombre')?.hasError('required') && formularioDeEmpleados.get('Nombre')?.touched " >
+      <span>El nombre <span> es obligatorio</span></span>
+    </div>
 </div>
 
 
@@ -16,19 +21,29 @@
     <label for="" class="form-label">Num. Personas</label>
     <input type="number"
       class="form-control" name="" formControlName="NumPersonas" id="" aria-describedby="helpId" placeholder="Escribe el numero de Personas">
-  </div>
+      <div class="text-danger"
+      
+      *ngIf="formularioDeEmpleados.get('NumPersonas')?.hasError('required') && formularioDeEmpleados.get('NumPersonas')?.touched " >
+      <span>El NumPersonas <span> es obligatorio</span></span>
+    </div>
+    </div>
   
 
   <div class="mb-3">
     <label for="" class="form-label">Telefono</label>
     <input type="text"
       class="form-control" name="" formControlName="Telefono" id="" aria-describedby="helpId" placeholder="Escribe un numero Telefonico">
-  </div>
+      <div class="text-danger"
+      
+      *ngIf="formularioDeEmpleados.get('Telefono')?.hasError('required') && formularioDeEmpleados.get('Telefono')?.touched " >
+      <span>El Telefono <span> es obligatorio</span></span>
+    </div>
+    </div>
   
 <div class="btn-group" role="group" aria-label="">
-  <button type="submit" class="btn btn-success"> Agregar </button>
+  <button type="submit" [disabled]="formularioDeEmpleados.invalid" class="btn btn-success"> Agregar </button>
 
-  <button type="button" class="btn btn-primary"> Cancelar </button>
+  <button type="button" routerLink="/home-empleado/" class="btn btn-primary"> Cancelar </button>
 </div>
 
 
